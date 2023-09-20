@@ -1,12 +1,28 @@
 import pandas as pd
 import streamlit as st
 import joblib
+from st_pages import Page, show_pages
+
+st.set_page_config(
+    page_title='App v1.3 - Predição de preços de imóveis'
+)
+
+show_pages(
+    [
+        Page("pages/sobre_projeto.py","Sobre o Projeto","📑"),
+        Page("pages/etapa1.py","Etapa 1: Webscrapping","🔍"),
+        Page("pages/etapa2.py","Etapa 2: Limpeza dos Dados","🛀"),
+        Page("pages/etapa3.py",'Etapa 3: Painel de Dados',"📊"),
+        Page("pages/etapa4.py",'Etapa 4: Modelo de ML🔍',"🛠️"),
+        Page("app.py", "Web App v 1.3", "🖥️"),
+    ]
+)
 
 # Importando os dados necessários:
-bairros = joblib.load('bairros.pkl')
-model = joblib.load('model.pkl')
-scaler = joblib.load('scaler.pkl')
-encoder = joblib.load('encoder.pkl')
+bairros = joblib.load(open('files/bairros.pkl', 'rb'))
+model = joblib.load(open('files/model.pkl','rb'))
+scaler = joblib.load(open('files/scaler.pkl','rb'))
+encoder = joblib.load(open('files/encoder.pkl','rb'))
 
 
 # Criando dataframe que vai receber os dados
@@ -15,6 +31,7 @@ apto = pd.DataFrame([[1,0,1,1,80,None,0,0,0,0,0]], columns=['quartos', 'suites',
 
 # Título
 st.title('Web App 1.0 - Predição de valor de apartamentos')
+st.write('Para conhecer mais sobre o projeto, convido você a navegar pelo menu ao lado. Você encontrará os detalhes de cada etapa de construção desse projeto.')
 st.subheader('Insira as característica do apartamento:')
 
 # Painel de inserção de dados
@@ -79,6 +96,6 @@ if click:
     st.subheader('Predição de valor do imóvel:  :blue[**R$ {:,.2f}**]'.format(preco[0]).replace('.', '|').replace(',', '.').replace('|', ','))
     st.info(f'Informações do apartamento:  \n Quartos: {quartos}  \n Suítes: {suites}  \n Banheiros: {banheiros}  \n Vagas: {vagas}  \n Metragem: {privativos} m2  \n Bairro: {bairro}  \n Piscina: {tem_piscina}  \n Gás Central: {tem_gas}  \n Elevador: {tem_elevador}  \n Salão de Festas: {tem_salao}  \n Academia: {tem_academia}')
 
+st.divider()
 st.markdown('''Desenvolvido por: **Pedro Lourenço Mendes Júnior**''')
 st.write("""<div style="width:100%;"><a href="https://www.linkedin.com/in/mendesjuniorpedro/" style="float:center"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" width="40px"></img></a>""" + """<a href="https://github.com/pedromendesjr" style="float:center"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="32px"></img></a></div>""", unsafe_allow_html=True)
-
