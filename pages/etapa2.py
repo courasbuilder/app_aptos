@@ -9,7 +9,7 @@ st.header(':orange[Etapa 2: Limpeza dos Dados]')
 st.image('https://media.giphy.com/media/Vdid4881G8lFkPFfeE/giphy.gif', width=300)
 '''
 A limpeza dos dados é uma etapa fundamental. Qualquer análise ou modelo de Machine Learning vai precisar
-de dados "bom comportados". A etapa de limpeza de dados não serve apenas para determinarmos o que é útil
+de dados "bem comportados". A etapa de limpeza de dados não serve apenas para determinarmos o que é útil
 e o que é inútil, essa etapa vai muito além. :orange[É fundamental garantir a visualização dos dados e a padronização
 das informações].
 
@@ -30,7 +30,7 @@ para o objetivo. Não temos qualquer pretenção além de demonstrar as técnica
 
 Ao fazer o webscrapping, todos os dados foram raspados em forma de texto (com exceção da infraestrutura que era uma lista 
 de textos), acontece que o próprio python/pandas já identificou algumas colunas numéricas. As colunas :orange[**quartos, 
-suítes, banheiros e vaga**] já estão formatadas com *float/int*, mas todo o resto está em *object*, até mesmo variáveis 
+suítes, banheiros e vagas**] já estão formatadas com *float/int*, mas todo o resto está em *object*, até mesmo variáveis 
 que serão numéricas, como preço e metragem do imóvel. 
 
 A respeito da presença de valores nulos/faltantes, temos alguns problemas:
@@ -152,18 +152,19 @@ st.subheader(':orange[2.3. Demais features: DataFrame vai tomando forma:]')
 st.image('https://media.giphy.com/media/b7tZKvYa7G3GDKpmJn/giphy.gif', width=300)
 '''
 * :orange[*O problema das features de infraestrutura:*]
+
 Como comentado anteriormente, queremos verificar se os imóveis possuem algumas qualidades importantes que podem impactar 
 no preço. Vamos criar 5 novas características: :orange[piscina, gás central, salão de festa, elevador e academia]. Nesse 
-momento, uma das nossas colunas **infra** contém uma lista com todos os itens presentes no condomínio em formato de texto. 
+momento, a coluna **infra** contém uma lista com todos os itens presentes no condomínio em formato de texto. 
 A variedade de itens presentes nas listas é enorme, e se fossemos criar uma coluna para avaliar a presença de cada características, 
 teríamos um dataset com muitas colunas, o que poderia gerar um problema de alta dimensionalidade. Sendo assim, vamos nos restringir
 aos 5 itens especificados anteriormente. 
 
-Para resolver o problema, tivemos que fazer dois passos: 
+Para resolver o problema, tivemos que fazer três passos: 
 
-* Transformar as strings da coluna :orange[infra] em uma lista.
+* Transformar as *strings* da coluna *infra* em uma lista.
 
-* O primeiro é criar uma lista com todas características que um condomínio pode ter. Isso foi necessários para buscar 
+* Criar uma lista com todas características que um condomínio pode ter. Isso foi necessários para buscar 
 nomes distintos para características iguais ou muito próximos, como por exemplo 'Sala Fitness' e 'Academia', ou ainda 'Gás Central'
 e 'Aquecimento a Gás'.  
 '''
@@ -197,7 +198,7 @@ st.code(code6, language='python')
 st.subheader(':orange[2.4. Últimos ajustes: Preparando para decolagem:]')
 st.image('https://media.giphy.com/media/YrkUExkYM5LRMDCs6g/giphy.gif', width=300)
 
-''''
+'''
 Analisando os dados, pudemos encontrar alguns dados que não faziam muito sentido para o nosso projeto. Por exemplo, encontramos
 um apartamento com 12 quartos e 21 vagas de garagem que, ao verificar o anúncio manualmente, se tratava de um conjunto de kitnets.
 Além disso, alguns imóveis possuiam valores extremamente altos e como o nosso objetivo com o projeto é puramente estudo, vamos eliminar
@@ -229,11 +230,11 @@ aptos_copy.drop(aptos[aptos.preco > sup_preco].index, axis = 0, inplace = True)
 '''
 st.code(code7, language='python')
 
-''''
+'''
 * :orange[*Últimos ajustes:*]
 
 Finalmente, excluímos algumas colunas que não nos interessam mais como: :orange[endereço](substituído por três novas colunas com 
-as informações segmentadas), :orange[infra, metragem total e coordenadas] também substituídas sem perda de informação relevante.
+as informações segmentadas), :orange[infra, metragem total e coordenadas] (também substituída sem perda de informação relevante).
 '''
 code8 = '''
 # Exclui algumas alunos que não são mais necessárias:
@@ -249,7 +250,7 @@ df_limpo_itajai = df_limpo.loc[df_limpo['cidade'] == 'Itajaí/SC']
 '''
 st.code(code9, language='python')
 '''
-Conversão das algumas colunas do formato float para int.
+Conversão de algumas colunas do formato float para int.
 '''
 code10 = '''
 # Converter os tipos de algumas colunas que estão em formato 'float' para 'int'. 
