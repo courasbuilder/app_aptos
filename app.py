@@ -9,12 +9,12 @@ st.set_page_config(
 
 show_pages(
     [
+        Page("app.py", "Web App v 1.3", "🖥️"),
         Page("pages/sobre_projeto.py","Sobre o Projeto","📑"),
         Page("pages/etapa1.py","Etapa 1: Webscrapping","🔍"),
         Page("pages/etapa2.py","Etapa 2: Limpeza dos Dados","🛀"),
         Page("pages/etapa3.py",'Etapa 3: Painel de Dados',"📊"),
-        Page("pages/etapa4.py",'Etapa 4: Modelo de ML🔍',"🛠️"),
-        Page("app.py", "Web App v 1.3", "🖥️"),
+        Page("pages/etapa4.py",'Etapa 4: Modelo de ML',"🛠️"),
     ]
 )
 
